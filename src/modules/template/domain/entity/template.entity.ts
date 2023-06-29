@@ -3,17 +3,17 @@ import { Author } from "../../../deploy/domain/value-object/author.value-object"
 
 export type TemplateProps = {
   id?: string
-  message: string
+  message?: string
   authorId?: string
   templateId?: string
-  author: Author
+  author?: Author
 }
 
 export default class Template extends BaseEntity {
-  private _message: string
+  private _message?: string
   private _authorId?: string
   private _templateId?: string
-  private _author: Author
+  private _author?: Author
 
   constructor(props: TemplateProps) {
     super(props.id)
