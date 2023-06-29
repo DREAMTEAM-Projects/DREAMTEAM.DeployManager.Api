@@ -11,17 +11,22 @@ import * as bi from 'azure-devops-node-api/interfaces/BuildInterfaces'
 const routes = Router()
 
 routes.post('/deploy', makeCreateDeployController().handle)
+import { createServer } from "http"
+import express from 'express'
+import routerConfig from './modules/@shared/config/router-config'
 
 const app = express()
 app.use(express.json())
-app.use(routes)
+routerConfig(app)
+
+app.use('/documents', DocumentRoute)
 
 app.use('/documents', DocumentRoute)
 
 const server = createServer(app)
 
 server.listen(process.env.PORT || 3000, async () => {
-  console.log('Server is running')
+  console.log(`Server is running on port ${process.env.PORT}`)
 })
 
 /* Azure Connection Implementation */

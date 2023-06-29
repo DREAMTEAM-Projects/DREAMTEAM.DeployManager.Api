@@ -1,6 +1,7 @@
 import Deploy from "../domain/entity/deploy.entity";
 import { DeployGateway } from "../gateway/deploy.gateway";
 import { PrismaClient } from '@prisma/client'
+import cripto from 'crypto'
 
 
 export default class DeployRepository implements DeployGateway {
@@ -26,7 +27,8 @@ export default class DeployRepository implements DeployGateway {
               email: author.email
             },
             create: {
-              ...author
+              ...author,
+              id: cripto.randomUUID()
             }
           }
         }

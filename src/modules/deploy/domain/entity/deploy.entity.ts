@@ -2,7 +2,6 @@ import BaseEntity from "../../../@shared/domain/entity/base.entity"
 import { Status } from "../enum/status.enum"
 import { Author } from "../value-object/author.value-object"
 
-
 export type DeployProps = {
   id?: string
   title: string

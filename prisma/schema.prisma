@@ -28,11 +28,20 @@ model Deploy {
 }
 
 model Author {
-  id         String   @id
+  id         String     @id
   name       String
-  email      String   @unique
-  externalId String   @unique @map("external_id")
+  email      String     @unique
+  externalId String     @unique @map("external_id")
   Deploy     Deploy[]
+  Template   Template[]
+}
+
+model Template {
+  id       String @id
+  authorId String @map("author_id")
+  message  String @db.Text
+
+  author Author @relation(fields: [authorId], references: [id])
 }
 
 model Documents {
