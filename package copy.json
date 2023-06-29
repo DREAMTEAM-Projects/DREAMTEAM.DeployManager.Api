@@ -12,7 +12,8 @@
     "db:seed": "prisma db seed",
     "db:prismaStudio": "prisma studio",
     "db:create": "prisma migrate dev --create-only --name",
-    "db:push": "prisma db push"
+    "db:push": "prisma db push",
+    "postinstall": "yarn db:generate"
   },
   "author": "",
   "license": "MIT",
