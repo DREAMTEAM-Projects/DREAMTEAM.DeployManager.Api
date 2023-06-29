@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import CreateDeployUseCase from "../usecase/create/create-deploy.usecase";
 import { CreateDeployUseCaseInputDto } from "../usecase/create/create-deploy.usecase.dto";
-import { HttpResponse } from "../../@shared/adapters/router-adapter.interface";
+import { Controller, HttpResponse } from "../../@shared/adapters/router-adapter.interface";
 
-export default class CreateDeployController {
+export default class CreateDeployController implements Controller {
 
   constructor(private readonly _createDeployUseCase: CreateDeployUseCase) { }
 
