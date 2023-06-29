@@ -2,6 +2,7 @@ import { Express, Router } from 'express'
 import templateRoutes from '../../template/infrastructure/api/template.routes'
 import deployRoutes from '../../deploy/infrastructure/api/deploy.routes'
 import teamRoutes from '../../team/infrastructure/api/team.routes'
+import projectRoutes from '../../project/infrastructure/api/project.routes'
 import documentRoutes from '../../documents/infrastructure/api/document.routes'
 
 export default (app: Express): void => {
@@ -10,5 +11,6 @@ export default (app: Express): void => {
   deployRoutes(router)
   documentRoutes(router)
   teamRoutes(router)
+  projectRoutes(router)
   app.use(router)
 }
