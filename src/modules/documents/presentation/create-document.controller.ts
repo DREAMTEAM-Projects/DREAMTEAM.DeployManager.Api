@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import CreateDeployUseCase from "../usecase/create/create-deploy.usecase";
-import { CreateDocumentUseCaseInputDto } from "../usecase/create/create-deploy.usecase.dto";
+import CreateDocumentUseCase from "../usecase/create/create-document.usecase";
+import { CreateDocumentUseCaseInputDto } from "../usecase/create/create-document.usecase.dto";
 
 export default class CreateDocumentController {
 
-  constructor(private readonly _createDocumentUseCase: CreateDeployUseCase) { }
+  constructor(private readonly _createDocumentUseCase: CreateDocumentUseCase) { }
 
   handle = async (req: Request, res: Response): Promise<Response> => {
     try {
@@ -16,8 +16,8 @@ export default class CreateDocumentController {
       const result = await this._createDocumentUseCase.execute(input)
       return res.status(201).json(result)
     } catch (error) {
+      console.log({ error })
       return res.status(500).json(error)
     }
   }
-
 }

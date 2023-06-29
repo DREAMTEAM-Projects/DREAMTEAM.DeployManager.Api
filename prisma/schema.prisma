@@ -24,6 +24,7 @@ model Deploy {
   tags       String?
   active     Boolean?  @default(true)
   author     Author    @relation(fields: [authorId], references: [id])
+  Documents Documents[]
 }
 
 model Author {
@@ -32,4 +33,12 @@ model Author {
   email      String   @unique
   externalId String   @unique @map("external_id")
   Deploy     Deploy[]
+}
+
+model Documents {
+  id String @id
+  filename String
+  url String
+  deployId String @map("deploy_id")
+  deploy Deploy @relation(fields: [deployId], references: [id])
 }

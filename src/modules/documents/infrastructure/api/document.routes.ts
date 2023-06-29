@@ -1,15 +1,10 @@
-import { PrismaClient } from '@prisma/client';
 import { Router } from 'express';
-import CreateDocumentController from '../../presentation/create-document.controller';
-import DocumentRepository from '../../repository/document.repository';
-import CreateDeployUseCase from '../../usecase/create/create-deploy.usecase';
+import { makeCreateDocumentController } from '../../factory/create-document-controller.factory';
+import { makeDeleteDocumentController } from '../../factory/delete-document-controller.factory';
 
-const routes = Router();
+const routes = Router()
 
-const deployRepository = new DocumentRepository(new PrismaClient())
-const createDeployUseCase = new CreateDeployUseCase(deployRepository)
-const createDeployController = new CreateDocumentController(createDeployUseCase)
-
-routes.post('/documents', createDeployController.handle);
+routes.post('/', makeCreateDocumentController().handle)
+routes.delete('/:document', makeDeleteDocumentController().handle)
 
 export default routes

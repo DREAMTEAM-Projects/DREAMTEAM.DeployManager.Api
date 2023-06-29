@@ -1,6 +1,6 @@
 import Document, { DocumentProps } from "../../domain/entity/documents.entity";
 import { DocumentGateway } from "../../gateway/document.gateway";
-import { CreateDocumentUseCaseInputDto, CreateDocumentUseCaseOutputDto } from "./create-deploy.usecase.dto";
+import { CreateDocumentUseCaseInputDto, CreateDocumentUseCaseOutputDto } from "./create-document.usecase.dto";
 
 export default class CreateDocumentUseCase {
 

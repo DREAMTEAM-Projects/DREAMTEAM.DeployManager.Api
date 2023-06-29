@@ -1,95 +1,39 @@
-import BaseEntity from "../../../@shared/domain/entity/base.entity"
-import { Status } from "../enum/status.enum"
-import { Author } from "../value-object/author.value-object"
+import BaseEntity from '../../../@shared/domain/entity/base.entity'
+import Deploy from '../../../deploy/domain/entity/deploy.entity'
 
-
-export type DeployProps = {
+export type DocumentProps = {
   id?: string
-  title: string
-  message: string
-  team: string
-  project: string
-  finishedAt?: Date
+  filename: string
+  url: string
   createdAt?: Date
   updatedAt?: Date
-  status?: Status
-  author: Author
-  tags?: string[]
+  deploy: Deploy
 }
 
-export default class Deploy extends BaseEntity {
-  private _title: string
-  private _message: string
-  private _team: string
-  private _project: string
-  private _finishedAt?: Date
-  private _status?: Status
-  private _author: Author
-  private _tags?: string[]
-  private _active: boolean
+export default class Document extends BaseEntity {
+  private _filename: string
+  private _url: string
+  private _deploy: Deploy
 
-  constructor(props: DeployProps) {
+  constructor(props: DocumentProps) {
     super(props.id, props.createdAt, props.updatedAt)
-    this._title = props.title
-    this._message = props.message
-    this._team = props.team
-    this._project = props.project
-    this._finishedAt = props.finishedAt
-    this._status = props.status || Status.PENDING
-    this._author = props.author
-    this._tags = props.tags || []
-    this._active = true
+    this._filename = props.filename
+    this._url = props.url
+    this._deploy = props.deploy
   }
 
-  update(props: DeployProps): void {
-    if (this._status === Status.FINISHED) {
-      throw new Error("Deploy is already finished")
-    }
-    this._title = props.title
-    this._message = props.message
-    this._team = props.team
-    this._project = props.project
-    this._finishedAt = props.finishedAt
-    this._status = props.status
-    this._author = props.author
-    this._tags = props.tags
+  create(props: DocumentProps): void {
+    this._deploy = props.deploy
+    this._filename = props.filename
+    this._url = props.url
   }
 
-  delete(): void {
-    if (this._status === Status.STARTED) {
-      throw new Error("Cannot delete an started deploy")
-    }
-    if (this._status === Status.FINISHED) {
-      throw new Error("Cannot delete a finished deploy")
-    }
-    this._active = false
-  }
-
-  finish(): void {
-    this._status = Status.FINISHED
-    this._finishedAt = new Date()
-  }
-
-  cancel(): void {
-    this._status = Status.CANCELLED
-  }
-
-  start(): void {
-    this._status = Status.STARTED
-  }
-
-  toJSON() {
+  toJSON(): any {
     return {
       id: this._id,
-      title: this._title,
-      message: this._message,
-      team: this._team,
-      project: this._project,
-      finishedAt: this._finishedAt,
-      status: this._status,
-      author: this._author,
-      tags: this._tags,
-      active: this._active,
+      filename: this._filename,
+      url: this._url,
+      deploy: this._deploy.id
     }
   }
 }
