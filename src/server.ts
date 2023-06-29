@@ -1,27 +1,16 @@
-import express, { Router } from 'express'
+import express from 'express'
 import { createServer } from 'http'
-import { makeCreateDeployController } from './modules/deploy/factory/create-deploy-controller.factory'
 import DocumentRoute from './modules/documents/infrastructure/api/document.routes'
+import routerConfig from './modules/@shared/config/router-config'
 
 /* Connect Azure */
 import * as azdev from 'azure-devops-node-api'
 import * as ba from 'azure-devops-node-api/BuildApi'
 import * as bi from 'azure-devops-node-api/interfaces/BuildInterfaces'
 
-const routes = Router()
-
-routes.post('/deploy', makeCreateDeployController().handle)
-import { createServer } from "http"
-import express from 'express'
-import routerConfig from './modules/@shared/config/router-config'
-
 const app = express()
 app.use(express.json())
 routerConfig(app)
-
-app.use('/documents', DocumentRoute)
-
-app.use('/documents', DocumentRoute)
 
 const server = createServer(app)
 

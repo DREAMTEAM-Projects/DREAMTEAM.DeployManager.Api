@@ -9,7 +9,7 @@ export default class DocumentRepository implements DocumentGateway {
 
   async save(document: Document): Promise<{ id: string }> {
     const jsonDocument = document.toJSON()
-    return this.client.documents.create({
+    return await this.client.documents.create({
       data: {
         id: jsonDocument.id,
         filename: jsonDocument.filename,
@@ -23,8 +23,8 @@ export default class DocumentRepository implements DocumentGateway {
   }
 
   async delete(id: string): Promise<{ id: string }> {
-    return this.client.documents.delete({
-      where: { id: id },
+    return await this.client.documents.delete({
+      where: { id },
       select: { id: true  }
     })
   }
