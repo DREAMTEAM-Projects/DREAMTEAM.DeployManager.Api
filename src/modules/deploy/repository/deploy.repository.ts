@@ -1,11 +1,9 @@
-import Deploy from "../domain/entity/deploy.entity";
-import { DeployGateway } from "../gateway/deploy.gateway";
 import { PrismaClient } from '@prisma/client'
 import cripto from 'crypto'
-
+import Deploy from '../domain/entity/deploy.entity'
+import { DeployGateway } from '../gateway/deploy.gateway'
 
 export default class DeployRepository implements DeployGateway {
- 
   constructor(private readonly client: PrismaClient) {}
 
   async save(deploy: Deploy): Promise<{ id: string }> {
@@ -20,7 +18,9 @@ export default class DeployRepository implements DeployGateway {
         finishedAt: jsonDeploy.finishedAt,
         status: Number(jsonDeploy.status),
         tags: jsonDeploy.tags?.join(),
+        pbis: jsonDeploy.pbis?.join(),
         active: jsonDeploy.active,
+        date: jsonDeploy.date !== null ? new Date(jsonDeploy.date!) : null,
         author: {
           connectOrCreate: {
             where: {
@@ -38,5 +38,4 @@ export default class DeployRepository implements DeployGateway {
       }
     })
   }
-
 }

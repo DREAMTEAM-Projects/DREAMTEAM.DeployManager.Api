@@ -1,4 +1,4 @@
-import { Author } from "../../domain/value-object/author.value-object"
+import { Author } from '../../domain/value-object/author.value-object'
 
 export interface CreateDeployUseCaseInputDto {
   title: string
@@ -7,6 +7,8 @@ export interface CreateDeployUseCaseInputDto {
   project: string
   author: Author
   tags?: string[]
+  pbis?: string[]
+  date?: Date
 }
 
 export interface CreateDeployUseCaseOutputDto {

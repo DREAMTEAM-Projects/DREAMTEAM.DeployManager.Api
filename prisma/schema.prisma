@@ -17,11 +17,13 @@ model Deploy {
   team       String
   project    String
   finishedAt DateTime? @map("finished_at")
+  date      DateTime?
   createdAt  DateTime  @default(now()) @map("created_at")
   upatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
   status     Int?
   authorId   String    @map("author_id")
   tags       String?
+  pbis       String?
   active     Boolean?  @default(true)
   author     Author    @relation(fields: [authorId], references: [id])
   Documents Documents[]
