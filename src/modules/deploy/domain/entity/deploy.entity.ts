@@ -11,11 +11,14 @@ export type DeployProps = {
   finishedAt?: Date
   createdAt?: Date
   updatedAt?: Date
-  date?: Date
   status?: Status
   author?: Author
   tags?: string[]
   pbis?: string[]
+  authorEmail?: string
+  authorName?: string
+  tag?: string
+  date?: Date
 }
 
 export default class Deploy extends BaseEntity {
@@ -30,6 +33,10 @@ export default class Deploy extends BaseEntity {
   private _tags?: string[]
   private _pbis?: string[]
   private _active: boolean
+  private _authorName?: string
+  private _authorEmail?: string
+  private _tag?: string
+
 
   constructor(props: DeployProps) {
     super(props.id, props.createdAt, props.updatedAt)
@@ -47,6 +54,10 @@ export default class Deploy extends BaseEntity {
     this._author = props.author
     this._tags = props.tags ?? []
     this._active = true
+    this._authorEmail = props.authorEmail
+    this._authorName = props.authorName
+    this._date = props.date
+    this._tag = props.tag
   }
 
   update(props: DeployProps): void {
@@ -101,7 +112,10 @@ export default class Deploy extends BaseEntity {
       tags: this._tags,
       pbis: this._pbis,
       date: this._date,
-      active: this._active
+      active: this._active,
+      authorEmail: this._authorEmail,
+      authorName: this._authorName,
+      tag: this._tag
     }
   }
 }

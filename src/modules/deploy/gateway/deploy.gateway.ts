@@ -1,5 +1,6 @@
 import Deploy from "../domain/entity/deploy.entity";
 import { FindDeployUseCaseOutputDto } from "../usecase/find/find-deploy.usecase.dto";
+import { ListDeployUseCaseOutputDto } from "../usecase/list/list-deploy.usecase.dto";
 import { UpdateDeployUseCaseOutputDto } from "../usecase/update/update-deploy.usecase.dto";
 
 export interface DeployGateway {
@@ -7,4 +8,6 @@ export interface DeployGateway {
   find(deploy: Partial<Deploy>): Promise<FindDeployUseCaseOutputDto | null>
   update(deploy: Deploy): Promise<UpdateDeployUseCaseOutputDto | null>
   delete(deploy: Partial<Deploy>): Promise<{ id: string }>
+  list(deploy: Partial<Deploy>): Promise<ListDeployUseCaseOutputDto[] | null>
 }
+

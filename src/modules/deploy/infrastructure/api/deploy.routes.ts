@@ -4,7 +4,8 @@ import {
   makeCreateDeployController,
   makeDeleteDeployController,
   makeFindDeployController,
-  makeUpdateDeployController
+  makeUpdateDeployController,
+  makeListDeployController
 } from '../../factory';
 
 export default (router: Router): void => {
@@ -23,6 +24,10 @@ export default (router: Router): void => {
   router.delete(
     '/deploy/:deployId',
     routerAdapter(makeDeleteDeployController())
+  )
+  router.delete(
+    '/deploy/list',
+    routerAdapter(makeListDeployController())
   )
 }
 

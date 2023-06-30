@@ -28,6 +28,11 @@ export default class CreateDeployController implements Controller {
           statusCode: 400,
           body: result
         }
+      
+      if (!result?.id) return {
+        statusCode: 400,
+        body: result
+      }
 
       return {
         statusCode: 201,
