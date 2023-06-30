@@ -10,7 +10,7 @@ export default class CreateDeployUseCase {
 
   async execute(
     input: CreateDeployUseCaseInputDto
-  ): Promise<CreateDeployUseCaseOutputDto> {
+  ): Promise<CreateDeployUseCaseOutputDto | null> {
     const props: DeployProps = {
       title: input.title,
       message: input.message,

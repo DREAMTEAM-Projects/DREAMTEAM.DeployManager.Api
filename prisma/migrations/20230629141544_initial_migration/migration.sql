@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `Deploy` (
+CREATE TABLE IF NOT EXISTS `Deploy` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
     `message` TEXT NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE `Deploy` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Author` (
+CREATE TABLE IF NOT EXISTS `Author` (
     `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,

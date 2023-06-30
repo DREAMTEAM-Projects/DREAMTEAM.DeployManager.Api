@@ -12,8 +12,53 @@ services:
       MYSQL_ROOT_PASSWORD: local_password
     ports:
       - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - db
+
+  migrate:
+    image: node:lts-alpine
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: local_password
+      MYSQL_DATABASE: cockpit
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo "Running migrations"
+        npm run db:migrate
+        echo "Done"
+    networks:
+      - db
+    depends_on:
+      mysql:
+        condition: service_healthy
+    working_dir: /app
+    volumes:
+      - ./:/app
+
+  server:
+    container_name: server
+    build: 
+      context: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./:/app
+    networks:
+      - db
+
+volumes:
+  db:
+    driver: local
 
 networks:
   db:
