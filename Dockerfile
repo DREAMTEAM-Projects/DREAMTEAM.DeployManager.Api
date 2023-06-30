@@ -12,8 +12,11 @@ COPY --chown=node:node . .
 
 RUN yarn
 
-RUN tsc
+RUN yarn global add tsc
+
+RUN yarn build
 
 EXPOSE 3000
 
 CMD ["npm", "start"]
+
