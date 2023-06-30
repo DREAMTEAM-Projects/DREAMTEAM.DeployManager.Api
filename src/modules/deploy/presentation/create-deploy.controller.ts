@@ -19,7 +19,7 @@ export default class CreateDeployController implements Controller {
       }
       const result = await this._createDeployUseCase.execute(input)
       
-      if (!result.id) return {
+      if (!result?.id) return {
         statusCode: 400,
         body: result
       }

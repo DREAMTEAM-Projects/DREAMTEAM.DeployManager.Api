@@ -1,13 +1,13 @@
 import Deploy, { DeployProps } from "../../domain/entity/deploy.entity";
 import { DeployGateway } from "../../gateway/deploy.gateway";
-import { CreateDeployUseCaseInputDto, CreateDeployUseCaseOutputDto } from "./create-deploy.usecase.dto";
+import { UpdateDeployUseCaseInputDto, UpdateDeployUseCaseOutputDto } from "./update-deploy.usecase.dto";
 
-export default class CreateDeployUseCase {
-
+export default class UpdateDeployUseCase {
   constructor(private readonly _deployRepository: DeployGateway) {}
 
-  async execute(input: CreateDeployUseCaseInputDto): Promise<CreateDeployUseCaseOutputDto | null> {
+  async execute(input: UpdateDeployUseCaseInputDto): Promise<UpdateDeployUseCaseOutputDto | null> {
     const props: DeployProps = {
+      id: input.id,
       title: input.title,
       message: input.message,
       team: input.team,
@@ -16,7 +16,6 @@ export default class CreateDeployUseCase {
       tags: input.tags
     }
     const deploy = new Deploy(props)
-    return await this._deployRepository.save(deploy)
+    return await this._deployRepository.update(deploy)
   }
-
 }

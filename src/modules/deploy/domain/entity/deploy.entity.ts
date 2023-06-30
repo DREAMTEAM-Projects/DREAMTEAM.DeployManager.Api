@@ -4,28 +4,28 @@ import { Author } from "../value-object/author.value-object"
 
 export type DeployProps = {
   id?: string
-  title: string
-  message: string
-  team: string
-  project: string
+  title?: string
+  message?: string
+  team?: string
+  project?: string
   finishedAt?: Date
   createdAt?: Date
   updatedAt?: Date
   status?: Status
-  author: Author
+  author?: Author
   tags?: string[]
 }
 
 export default class Deploy extends BaseEntity {
-  private _title: string
-  private _message: string
-  private _team: string
-  private _project: string
+  private _title?: string
+  private _message?: string
+  private _team?: string
+  private _project?: string
   private _finishedAt?: Date
   private _status?: Status
-  private _author: Author
+  private _author?: Author
   private _tags?: string[]
-  private _active: boolean
+  private _active?: boolean
 
   constructor(props: DeployProps) {
     super(props.id, props.createdAt, props.updatedAt)
@@ -34,9 +34,9 @@ export default class Deploy extends BaseEntity {
     this._team = props.team
     this._project = props.project
     this._finishedAt = props.finishedAt
-    this._status = props.status || Status.PENDING
+    this._status = props.status ?? Status.PENDING
     this._author = props.author
-    this._tags = props.tags || []
+    this._tags = props.tags ?? []
     this._active = true
   }
 
