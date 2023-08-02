@@ -5,7 +5,7 @@ services:
     healthcheck:
       test: mysqladmin ping -plocal_password
     environment:
-      MYSQL_DATABASE: cockpit
+      MYSQL_DATABASE: deploy-manager
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_ROOT_USER: root
@@ -25,7 +25,7 @@ services:
       MYSQL_PORT: 3306
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: local_password
-      MYSQL_DATABASE: cockpit
+      MYSQL_DATABASE: deploy-manager
     command:
       - /bin/sh
       - -c
